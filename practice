@@ -14,5 +14,6 @@ else:
     with open(filename, "w") as file:
         file.write("Hello from VS Code and Python!\n")
     print("File created successfully!")
+    print("Code for automation of coralogix alerts")
 
-print("--- UnFinished ---")
+print("--- Finished ---")
