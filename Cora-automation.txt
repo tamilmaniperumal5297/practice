@@ -15,5 +15,6 @@ else:
         file.write("Hello from VS Code and Python!\n")
     print("File created successfully!")
     print("Code for automation of coralogix alerts")
+Need to review it
 
-print("--- NotFinished ---")
+print("--- UnFinished ---")
