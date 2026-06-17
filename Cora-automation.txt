@@ -16,5 +16,5 @@ else:
     print("File created successfully!")
     print("Code for automation of coralogix alerts")
 Need to review it
-
+Need to check the Code
 print("--- UnFinished ---")
