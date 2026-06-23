@@ -1,0 +1,14 @@
+{
+  "user": {
+    "id": 5297,
+    "name": "Tamilmani Perumal",
+    "isDeveloper": true,
+    "skills": ["Git", "VS Code", "APIs"],
+    "currentProject": {
+      "name": "practice",
+      "branch": "API-testing",
+      "status": "synchronized"
+    }
+  }
+}
+Code to deploy in the production environment:
