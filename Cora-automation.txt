@@ -17,4 +17,5 @@ else:
     print("Code for automation of coralogix alerts")
 Need to review it
 Need to check the Code
+Need to apply in prod
 print("--- UnFinished ---")
