@@ -2,18 +2,47 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>🌴 The Jungle App</title>
+    <title>🌴 The Jungle App - Live Stats</title>
 </head>
 <body style="background-color: #0B2415; color: #E8F5E9; text-align: center; font-family: 'Courier New', Courier, monospace; padding-top: 50px;">
     
     <h1>🦁 Welcome to the Jungle Ecosystem 🌴</h1>
     <p>This UI is deployed via a real-world GitHub-to-Jenkins CI/CD pipeline!</p>
 
-    <div style="margin: 40px auto; padding: 20px; border: 2px dashed #4CAF50; width: 300px; border-radius: 10px;">
-        <h3>Select an Animal to Explore:</h3>
-        <button onclick="alert('Roar! You selected the Lion! 🦁')" style="background-color: #4CAF50; color: white; border: none; padding: 10px 20px; margin: 5px; cursor: pointer; border-radius: 5px;">Lion 🦁</button>
-        <button onclick="alert('Chirp! You selected the Monkey! 🐒')" style="background-color: #8B4513; color: white; border: none; padding: 10px 20px; margin: 5px; cursor: pointer; border-radius: 5px;">Monkey 🐒</button>
+    <div style="margin: 30px auto; padding: 20px; border: 2px dashed #4CAF50; width: 450px; border-radius: 10px; background-color: #113620;">
+        <h3>Select an Animal to Explore Live Stats:</h3>
+        <button onclick="showStats('lion')" style="background-color: #4CAF50; color: white; border: none; padding: 12px 24px; margin: 5px; cursor: pointer; border-radius: 5px; font-weight: bold;">Lion 🦁</button>
+        <button onclick="showStats('monkey')" style="background-color: #8B4513; color: white; border: none; padding: 12px 24px; margin: 5px; cursor: pointer; border-radius: 5px; font-weight: bold;">Monkey 🐒</button>
+        
+        <!-- Hidden display area that opens up dynamically -->
+        <div id="status-card" style="display: none; margin-top: 20px; padding: 15px; background: #07190E; border-radius: 5px; text-align: left; border-left: 5px solid #4CAF50;">
+            <h4 id="animal-title" style="margin: 0 0 10px 0;"></h4>
+            <p id="animal-pop"></p>
+            <p id="animal-types"></p>
+        </div>
     </div>
 
+    <script>
+        function showStats(animal) {
+            var card = document.getElementById('status-card');
+            var title = document.getElementById('animal-title');
+            var pop = document.getElementById('animal-pop');
+            var types = document.getElementById('animal-types');
+            
+            card.style.display = "block";
+            
+            if(animal === 'lion') {
+                title.innerText = "🦁 Asiatic Lion Ecosystem (India)";
+                pop.innerHTML = "📊 <b>Estimated Population:</b> ~700+ in the wild (primarily Gir National Park, Gujarat).";
+                types.innerHTML = "🧬 <b>Key Sub-species:</b> Asiatic Lion (Panthera leo leo). Status is endangered but strictly protected.";
+                card.style.borderLeftColor = "#4CAF50";
+            } else if(animal === 'monkey') {
+                title.innerText = "🐒 Primates Ecosystem (India)";
+                pop.innerHTML = "📊 <b>Estimated Population:</b> Abundant across diverse forest reserves and urban biomes.";
+                types.innerHTML = "🧬 <b>Common Types in India:</b> Rhesus Macaque, Hanuman Langur, Bonnet Macaque, and the rare Lion-tailed Macaque.";
+                card.style.borderLeftColor = "#8B4513";
+            }
+        }
+    </script>
 </body>
 </html>
