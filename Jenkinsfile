@@ -2,19 +2,30 @@ pipeline {
     agent any
 
     stages {
+        stage('Install Testing Tools') {
+            steps {
+                echo 'Installing tidy validator inside the Jenkins environment...'
+                // If Jenkins runs as root or standard user, this handles both cleanly
+                sh 'apt-get update && apt-get install -y tidy || sudo apt-get update && sudo apt-get install -y tidy'
+            }
+        }
+
+        stage('Test HTML Syntax') {
+            steps {
+                echo 'Scanning index.html for structural layout errors...'
+                // -errors tells tidy to ONLY output crucial errors, ignoring minor alerts
+                // -quiet hides the default welcome banners from messy logs
+                sh 'tidy -errors -quiet index.html'
+            }
+        }
+
         stage('Deploy Jungle App') {
             steps {
-                echo 'Pulling the latest code from GitHub and deploying...'
-                
+                echo 'Test passed flawlessly! Initializing Nginx deployment...'
                 sh '''
-                    # 1. Stop and clear out the previous container if it exists
                     docker stop my-jungle-web-app || true
                     docker rm my-jungle-web-app || true
-                    
-                    # 2. Spin up a fresh Nginx container
                     docker run -d --name my-jungle-web-app -p 8083:80 nginx:alpine
-                    
-                    # 3. Wait 2 seconds and copy our HTML file straight from the GitHub download workspace
                     sleep 2
                     docker cp index.html my-jungle-web-app:/usr/share/nginx/html/index.html
                 '''
