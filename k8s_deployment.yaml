@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jungle-k8s-app
+  labels:
+    app: jungle-k8s-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: jungle-k8s-app
+  template:
+    metadata:
+      labels:
+        app: jungle-k8s-app
+    spec:
+      containers:
+      - name: jungle-k8s-container
+        image: jungle-k8s-app:latest
+        imagePullPolicy: Never # Uses local Docker daemon image
+        ports:
+        - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jungle-k8s-service
+spec:
+  type: NodePort
+  selector:
+    app: jungle-k8s-app
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+      nodePort: 30080
