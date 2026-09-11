@@ -10,7 +10,6 @@ pipeline {
         stage('1. Static Code Check') {
             steps {
                 echo 'Checking Python application files...'
-                // Skip python check inside Jenkins container if python is not installed
                 sh 'echo "Skipping local python check, proceeding to Docker build..."'
             }
         }
@@ -25,7 +24,8 @@ pipeline {
         stage('3. Deploy to Kubernetes Cluster') {
             steps {
                 echo 'Applying Kubernetes manifests...'
-                sh 'kubectl apply -f k8s-deployment.yaml'
+                // Updated to match k8s_deployment.yaml with underscore
+                sh 'kubectl apply -f k8s_deployment.yaml'
                 sh "kubectl rollout restart deployment/${APP_NAME}"
             }
         }
